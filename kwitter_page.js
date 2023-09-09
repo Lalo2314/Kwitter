@@ -42,9 +42,22 @@ function getData() { firebase.database().ref("/"+room_name).on('value', function
  } }); }); } 
 getData();
 
+
+function updateLike(message_id)
+{
+    console.log("presionó el botón de Me gusta: " + message_id);
+    button_id = message_id;
+    likes = document.getElementById(button_id).value;
+    update_likes = Number(likes) + 1;
+    console.log(update_likes);
+
+    firebase.database().ref(room_name).child(message_id).update({
+        like : update_likes
+     });
+
+}
+
  
-
-
 function logout(){
     localStorage.removeItem("user_name"); 
     localStorage.removeItem("room_name"); 
